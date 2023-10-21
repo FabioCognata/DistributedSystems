@@ -22,6 +22,7 @@ public class AppContextListener implements ServletContextListener {
       return db;
     } catch (SQLException sqle) {
       System.out.println("SQLException: " + sqle.getMessage());
+      sqle.printStackTrace();
       System.out.println("SQLState: " + sqle.getSQLState());
       System.out.println("VendorError: " + sqle.getErrorCode());
       return null;
@@ -42,6 +43,7 @@ public class AppContextListener implements ServletContextListener {
     ServletContext context = event.getServletContext();
     context.setAttribute("databaseConnection", sqldao);
     TimeZone.setDefault(TimeZone.getTimeZone("Europe/Rome"));
+    
   }
 
   public void contextDestroyed(ServletContextEvent event) {
