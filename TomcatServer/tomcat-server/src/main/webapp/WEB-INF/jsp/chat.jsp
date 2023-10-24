@@ -18,7 +18,7 @@
                       var currentUsername = "${currentUsername}";
                     </script>
                     <script src="js/deploy.js?v=1.8" defer></script>
-                    <script src="js/chat.js?v=1.16" defer></script>
+                    <script src="js/chat.js?v=1.17" defer></script>
         </head>
 
         <body style="margin: 0px;">
