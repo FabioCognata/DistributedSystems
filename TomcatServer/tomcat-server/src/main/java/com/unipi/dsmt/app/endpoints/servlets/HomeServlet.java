@@ -3,6 +3,8 @@ package com.unipi.dsmt.app.endpoints.servlets;
 import java.sql.Connection;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
 
 import com.unipi.dsmt.app.daos.UserDAO;
 import com.unipi.dsmt.app.dtos.UserProfileDTO;
@@ -29,13 +31,13 @@ public class HomeServlet extends HttpServlet {
                 public boolean test(UserProfileDTO user) {
                     return !user.getUsername().equals(currentUsername);
                 }
-            }).toList();
+            }).collect(Collectors.toList());
             List<UserProfileDTO> onlineList = usersList.stream().filter(new Predicate<UserProfileDTO>() {
                 @Override
                 public boolean test(UserProfileDTO user) {
                     return user.isOnline_flag();
                 }
-            }).toList();
+            }).collect(Collectors.toList());
             request.setAttribute("usersList", usersList);
             request.setAttribute("onlineUsers", onlineList);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
