@@ -13,9 +13,9 @@ registry_loop(Mappings) ->
       io:format("[Register] -> adding user ~p with pid ~p~n",[Username, Pid]),
       NewMappings = maps:put(Username, Pid, Mappings),
       registry_loop(NewMappings);
-    {lookup, Username, Caller} ->
-      case maps:get(Username, Mappings) of 
-        Pid when Pid =/= undefined -> Caller ! {username_pid, Pid};
+    {lookup, Username, Caller, Json} ->
+      case maps:find(Username, Mappings) of 
+        Pid when Pid =/= undefined, Pid =/= error -> Caller ! {username_pid, Pid, Json};
         _ -> Caller ! {username_pid, undefined}
       end;
     {unregister, Username} ->
